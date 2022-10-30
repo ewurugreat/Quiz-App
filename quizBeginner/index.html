@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="text" placeholder="name" name="name" id=""><br><br>
+        <input type="text" placeholder="Age" name="age" id=""><br><br>
+        <input type="text" placeholder="Contact" name="contact" id="">
+        <button>Submit</button>
+    </form>
+    <div class="container"></div>
+</body>
+<script>
+    var form = document.querySelector("form");
+    var nameInput = document.querySelectorAll("input")[0];
+    var ageInput = document.querySelectorAll("input")[1];
+    var contactInput = document.querySelectorAll("input")[2];
+    var container = document.querySelector(".container")
+    var libray = localStorage.getItem("how") ? JSON.parse(localStorage.getItem("how")) : [];
+
+    function myArray(name, age, contact){
+        libray.push({
+            name: name,
+            age: age,
+            contact: contact
+        })
+
+
+        return libray
+    }
+
+    function CreateDiv({ name, age, contact }) {
+        container.innerHTML += `<div>
+    <h1> Student Name: ${name} </h1>
+    <p> Student Age: ${age} </p>
+    <p> Student Contact ${contact} </p>
+    
+    </div>
+    `
+    }
+    libray.forEach(CreateDiv())
+    function myForm(e){
+        var nameValue = nameInput.value.trim();
+        var ageValue = ageInput.value.trim();
+        var contactValue = contactInput.value.trim()
+        if(nameValue, ageValue, contactValue){
+         let a = myArray(nameValue, ageValue, contactValue) 
+            localStorage.setItem("how", JSON.stringify(a))
+            CreateDiv(a);
+          
+        }
+
+    }
+
+
+    form.addEventListener("submit", myForm)
+</script>
+
+</html>
